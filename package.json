@@ -5,7 +5,7 @@
     "keywords" : ["comb", "Proxy"],
     "repository": {
         "type": "git",
-        "url": "git@github.com:Pollen/comb.git"
+        "url": "git@github.com:Pollenware/comb-proxy.git"
     },
     "dependencies" : {
         "node-proxy" : ">=0.5.2"
@@ -13,8 +13,7 @@
     "devDependencies" : {
         "comb" : ">=0.1.0"
     },
-    "homepage": "http://pollenware.github.com/comb/symbols/comb.html",
-    "author": "Pollenware (http://pollenware.github.com)",
+    "author": "Doug Martin (http://pollenware.github.com)",
     "main": "index.js",
     "directories": {
         "lib": "lib"
