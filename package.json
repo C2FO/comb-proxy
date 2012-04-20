@@ -1,0 +1,24 @@
+{
+    "name": "comb-proxy",
+    "description": "A framework for node",
+    "version": "0.0.1",
+    "keywords" : ["comb", "Proxy"],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Pollenware/comb-proxy.git"
+    },
+    "dependencies" : {
+        "node-proxy" : ">=0.5.2"
+    },
+    "devDependencies" : {
+        "comb" : ">=0.1.0"
+    },
+    "author": "Doug Martin (http://pollenware.github.com)",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "engines": {
+        "node": ">= 0.6.1"
+    }
+}
