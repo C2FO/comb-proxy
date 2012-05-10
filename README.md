@@ -69,7 +69,7 @@ Alias for comb.
 
 
 ---
-*Defined * [Top](#top)
+*Defined proxy.js* [Top](#top)
 
 
 Creates a function proxy for an object.
@@ -161,18 +161,18 @@ function (obj,handler,constructTrap,opts){
 
 
 ---
-*Defined * [Top](#top)
+*Defined promise.js* [Top](#top)
 
 
 This method allows one to code asynchronous code in a synchronous manner.
 
-    <p>
-        <b>
-            Using Object.define[rest of name] on objects passed will result in unexpected behavior.</br>
-            Enumerating passed in object keys is not currently supported. i.e for in loops on objects.
-            using array enumeration methods will work though!!
-        </b>
-    </p>
+<p>
+    <b>
+    Using Object.define[rest of name] on objects passed will result in unexpected behavior.</br>
+    Enumerating passed in object keys is not currently supported. i.e for in loops on objects.
+    using array enumeration methods will work though!!
+    </b>
+</p>
 
 
         
@@ -279,7 +279,7 @@ function (args,cb){
 
 
 ---
-*Defined * [Top](#top)
+*Defined proxy.js* [Top](#top)
 
 
 Creates a proxy for an object.
@@ -321,7 +321,7 @@ function (obj,opts,proto){
 
 
 ---
-*Defined * [Top](#top)
+*Defined proxy.js* [Top](#top)
 
 
  Determines if the object is a proxy or not.
@@ -361,7 +361,7 @@ function (obj){
 
 
 ---
-*Defined * [Top](#top)
+*Defined proxy.js* [Top](#top)
 
 
 Creates a method missing proxy for an object.
@@ -472,7 +472,7 @@ var MyClass = comb.define(comb.plugins.MethodMissing, {
 
 ###Constructor
 
-*Defined * [Top](#top)
+*Defined plugins/MethodMissing.js* [Top](#top)
      
 
 
@@ -484,7 +484,7 @@ var MyClass = comb.define(comb.plugins.MethodMissing, {
 
 
 ---
-*Defined * [Top](#top)
+*Defined plugins/MethodMissing.js* [Top](#top)
 
 
 Method called to retrieve a property that is not found on the current instance of the object
@@ -519,7 +519,7 @@ function (name){
 
 
 ---
-*Defined * [Top](#top)
+*Defined plugins/MethodMissing.js* [Top](#top)
 
 
 Method called to set a property that is not found on the current instance of the object
