@@ -1,291 +1,959 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Comb-proxy by Pollenware</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coddoc</title>
+   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+      <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
+      <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css">
+    <style type="text/css">
+            
 
+.subnav-inner {
+    width: 100%;
+    height: 36px;
+    background-color: #EEE;
+    background-repeat: repeat-x;
+    background-image: -moz-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, whiteSmoke), color-stop(100%, #EEE));
+    background-image: -webkit-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    background-image: -ms-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    background-image: -o-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#f5f5f5', endColorstr = '#eeeeee', GradientType = 0);
+    background-image: linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.subnav .nav > li > a:hover {
+    color: black !important;
+}
+
+.subnav .nav li.dropdown .dropdown-toggle .caret,
+.subnav .nav li.dropdown.open .caret {
+    border-top-color: #999 !important;
+    border-bottom-color: #999 !important;
+}
+
+.subnav-fixed {
+    position: fixed;
+    width : 90%;
+    margin-right: auto;
+    margin-left: auto;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 1020;
+    border-color: #D5D5D5;
+    border-width: 0 0 1px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+    -moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.navbar .nav  .dropdown-menu {
+    max-height: 500px;
+    overflow: auto;
+}​
+
+        </style>
+        <style type="text/css">
+          body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+          }
+        </style>
+     <script type="text/javascript">
+         var init = (function () {
+             "use strict";
+
+             var processScroll = (function () {
+                 var curr = null, prev = null;
+                 return function (nav) {
+                     var $win = $(window);
+                     $('.subnav').each(function () {
+                         var nav = $(this);
+                         var navTop = nav.offset().top - 40;
+                         var scrollTop = $win.scrollTop();
+                         if (scrollTop >= navTop && curr != nav) {
+                             if(curr){
+                                 curr.removeClass('subnav-fixed')
+                                 prev = curr;
+                             }
+                             curr = nav;
+                             curr.addClass('subnav-fixed')
+                         } else if (curr == nav && scrollTop <= navTop) {
+                             curr.removeClass('subnav-fixed');
+                             prev.addClass('subnav-fixed');
+                             curr = prev;
+                         }else{
+                             nav.removeClass('subnav-fixed');
+                         }
+                     });
+                 };
+             })();
+
+             return function () {
+                 window.prettyPrint && prettyPrint();
+                 $(".collapse").collapse();
+                 // fix sub nav on scroll
+                 processScroll();
+                 $(window).on('scroll', processScroll)
+             }
+         })();
+     </script>
   </head>
-  <body>
+  <body onload="init()">
+    <div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+      
+          <a href="#" class="brand">comb-proxy</a>
+      
+           <div class="nav-collapse">
+      <ul class="nav nav-pills">
+      
+        <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+           <ul class="dropdown-menu">
+             
+                         <li><a href="#comb">comb</a></li>
+               
+           </ul>
+           </li>
+        
+        
+           <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+           <ul class="dropdown-menu">
+             
+                         <li><a href="#comb_plugins_MethodMissing">comb.plugins.MethodMissing</a></li>
+               
+           </ul>
+        </li>
+       
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/Pollenware/comb-proxy">Fork On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/Pollenware/comb-proxy/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/Pollenware/comb-proxy/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
 
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>Comb-proxy</h1>
-          <p>Proxy plugin for comb library</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/Pollenware">Pollenware</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
-        </div>
-
-        <h1>comb-proxy</h1>
+    <div class="container-fluid">
+        <a name="top"></a>
+        <div class="container">
+        
+  <h1>comb-proxy</h1>
 
 <h2>Overview</h2>
+<p>
+     Comb-proxy is plugin for comb to expose ProxyHelpers.
+</p>
 
-<p>Plugin for comb to expose ProxyHelpers.</p>
+<h2> Installation</h2>
 
-<h2>Installation</h2>
+<pre class='prettyprint linenums lang-js'>
+ npm install comb-proxy
+</pre>
 
-<pre><code>npm install comb-proxy
-</code></pre>
 
 <h2>Usage</h2>
 
-<p>To initialize comb-proxy simply require it.</p>
+To initialize comb-proxy simply require it.
 
-<div class="highlight">
-<pre>
-   <span class="kd">var</span> <span class="nx">comb</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"comb-proxy"</span><span class="p">);</span>
+<pre class='prettyprint linenums lang-js'>
+
+var comb = require("comb-proxy");
 
 </pre>
+
+<h2>API</h2>
+
+        
+    <a name="comb"></a>
+    <div class="navbar subnav">
+    <div class="navbar-inner  subnav-inner">
+                  <div class="container">
+                    <a href="#" class="brand">
+                                comb
+                                
+                                
+                                        
+                                 <span class="label label-success">Public</span>
+                                        
+                                
+                    </a>
+                   <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                            </a>
+
+                            <div class="nav-collapse">
+            
+            <ul class="nav pull-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Methods<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    
+                    <li><a href="#comb_createFunctionWrapper">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        createFunctionWrapper
+                     </a></li>
+                    
+                    <li><a href="#comb_executeInOrder">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        executeInOrder
+                     </a></li>
+                    
+                    <li><a href="#comb_handlerProxy">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        handlerProxy
+                     </a></li>
+                    
+                    <li><a href="#comb_isProxy">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        isProxy
+                     </a></li>
+                    
+                    <li><a href="#comb_methodMissing">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        methodMissing
+                     </a></li>
+                    
+                </ul>
+            </li>
+            </ul>
+            
+            </div>
+            </div>
+     </div>
+</div>
+<em>Defined </em>
+
+<p>
+Alias for comb.</p>
+
+
+
+
+
+    
+    
+        <a name="comb_createFunctionWrapper"></a>
+    <h3>
+        createFunctionWrapper
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined </em>
+
+<p>
+Creates a function proxy for an object.
+
+</p>
+
+    <em>Example</em>
+        <pre class="prettyprint linenums lang-js">
+//create an object that can use properties or as a function through the new operator
+var MyObject = comb.define(null, {
+    instance : {
+        hello : &quot;hello&quot;,
+        constructor : function(){
+            this.args = comb.argsToArray(arguments);
+        }
+    }
+});
+
+//NOTE: this will not work properly for native objects like Date.
+var createNewMyObject = function(){
+   try {
+     p = new MyObject();
+    } catch (ignore) {
+         //ignore the error because its probably from missing arguments
+    }
+    //Now lets take care of arguments supplied!!!
+    MyObject.apply(p, comb.argsToArray(arguments));
+    return p;
+};
+
+//This example creates an object with a world property but its not a function!
+var handle = comb.createFunctionWrapper({world : &quot;world&quot;}, createNewMyObject, createNewMyObject);
+
+handle.world //=&gt; &quot;world&quot;
+var a = handle(1);
+a.hello;  //=&gt;&quot;hello&quot;
+a.args; //=&gt; [1];
+a = new handle(1,2);
+a.hello; //=&gt;&quot;hello&quot;
+a.args; //=&gt; [1,2];
+        </pre>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : the object to proxy</li>
+    
+        <li> <em>handler</em>  : the handler to call when the object is used as a function</li>
+    
+        <li> <em>constructTrap</em>  : the funciton to use when using new on the object</li>
+    
+        <li> <em>opts</em>  : the prototype of the object.</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj,handler,constructTrap,opts){
+   var args = comb.argsToArray(arguments), ret;
+   if (args.length != 4) {
+       opts = comb.isHash(args[args.length - 1]) ? args.pop() : null;
+       constructTrap = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
+       handler = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
+   }
+   if (comb.isUndefined(obj)) throw new Error(&quot;obj required when using create function wrapper&quot;);
+   if (comb.isFunction(constructTrap) &amp;&amp; !comb.isFunction(handler)) {
+       ret = Proxy.createFunction(handlerMaker(obj), constructTrap);
+   } else {
+       ret = Proxy.createFunction(handlerMaker(obj), handler, constructTrap);
+   }
+   if (opts) {
+       Proxy.setPrototype(ret, comb.isHash(opts) ? opts : opts.prototype);
+   }
+   return ret;
+}
+    </pre>
+    
+
+
+    
+        <a name="comb_executeInOrder"></a>
+    <h3>
+        executeInOrder
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined </em>
+
+<p>
+This method allows one to code asynchronous code in a synchronous manner.
+
+    <p>
+        <b>
+            Using Object.define[rest of name] on objects passed will result in unexpected behavior.</br>
+            Enumerating passed in object keys is not currently supported. i.e for in loops on objects.
+            using array enumeration methods will work though!!
+        </b>
+    </p>
+
+</p>
+
+    <em>Example</em>
+        <pre class="prettyprint linenums lang-js">
+var staticValueFunction = function (value) {
+     return comb.argsToArray(arguments).join(&quot; &quot;);
+};
+
+var promiseValueFunction = function (value) {
+     var ret = new comb.Promise();
+     setTimeout(comb.hitch(ret, &quot;callback&quot;, comb.argsToArray(arguments).join(&quot; &quot;)), 100);
+     return ret;
+};
+
+var hash = {
+     staticValueFunction:staticValueFunction,
+     promiseValueFunction:promiseValueFunction
+};
+
+var p = comb.executeInOrder(hash, staticValueFunction, promiseValueFunction, function (hash, staticValueFunction, promiseValueFunction) {
+    var toBe = staticValueFunction(promiseValueFunction(&quot;to&quot;), &quot;be&quot;);
+    var notToBe = hash.promiseValueFunction(&quot;or&quot;, hash.staticValueFunction(&quot;not&quot;, toBe));
+    return hash.promiseValueFunction(toBe, notToBe);
+});
+p.addCallback(function(ret){
+    console.log(ret); //=&gt;&quot;to be or not to be&quot;
+});
+        </pre>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>args</em>  : variable number of objects.</li>
+    
+        <li> <em>cb</em>  : the function to callback to execute in order</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li>  comb.Promise</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (args,cb){
+   args = comb.argsToArray(arguments);
+   cb = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
+   var ret = new Promise();
+   if (cb) {
+       var stack = [];
+       var newArgs = args.map(function (a) {
+           return [a, getHandler(a, stack)];
+       });
+       var cbRet = cb.apply(null, newArgs.map(function (h) {
+           return h[1];
+       }));
+       executeStack(stack, newArgs).then(function (results, pMap) {
+           if (comb.isUndefined(cbRet)) {
+               ret.callback(results);
+           }
+           else {
+               var cbResults;
+               if (comb.isArray(cbRet)) {
+                   cbResults = cbRet.map(
+                       function (arg) {
+                           return getValueFromArrayMap(arg, pMap, newArgs);
+                       }).filter(function (r) {
+                           return !comb.isUndefined(r)
+                       });
+               } else if (comb.isHash(cbRet)) {
+                   cbResults = {};
+                   for (var i in cbRet) {
+                       cbResults[i] = getValueFromArrayMap(cbRet[i], pMap, newArgs);
+                   }
+               } else if (comb.isProxy(cbRet)) {
+                   cbResults = getValueFromArrayMap(cbRet, pMap, newArgs);
+               } else {
+                   cbResults = cbRet;
+               }
+               ret.callback(cbResults);
+           }
+       }, hitch(ret, &quot;errback&quot;));
+   } else {
+       ret.callback();
+   }
+   return ret;
+       
+}
+    </pre>
+    
+
+
+    
+        <a name="comb_handlerProxy"></a>
+    <h3>
+        handlerProxy
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined </em>
+
+<p>
+Creates a proxy for an object.
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : object to proxy</li>
+    
+        <li> <em>opts</em>  : object with methods to define on the handler.</li>
+    
+        <li> <em>proto</em>  : </li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj,opts,proto){
+   opts = opts || {};
+   if (comb.isUndefined(proto)) {
+       return  Proxy.create(merge(handlerMaker(obj), opts));
+   } else {
+       return  Proxy.create(merge(handlerMaker(obj), opts), comb.isHash(proto) ? proto : proto.prototype);
+   }
+}
+    </pre>
+    
+
+
+    
+        <a name="comb_isProxy"></a>
+    <h3>
+        isProxy
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined </em>
+
+<p>
+ Determines if the object is a proxy or not.
+
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : object to test</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Boolean</code> true if it is a proxy false otherwise</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj){
+   var undef;
+   return obj !== undef &amp;&amp; obj !== null &amp;&amp; Proxy.isProxy(obj);
+}
+    </pre>
+    
+
+
+    
+        <a name="comb_methodMissing"></a>
+    <h3>
+        methodMissing
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined </em>
+
+<p>
+Creates a method missing proxy for an object.
+<b>NOTE:</b> This method does not gurantee that the property will be used as a function call.
+
+</p>
+
+    <em>Example</em>
+        <pre class="prettyprint linenums lang-js">
+var x = {hello:function () {return &quot;hello&quot;}, world:&quot;world&quot;};
+ var xHandler = comb.methodMissing(x, function (m) {
+             //you can do more interesting stuff in here!
+              return function () {
+                  return [m].concat(comb.argsToArray(arguments));
+              }
+  });
+ xHandler.hello(); //=&gt; &quot;hello&quot;
+ xHandler.world //=&gt; &quot;world&quot;
+ xHandler.someMethod(&quot;hello&quot;, &quot;world&quot;); //=&gt; [ &#x27;someMethod&#x27;, &#x27;hello&#x27;, &#x27;world&#x27; ]
+        </pre>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : object to wrap with a method missing proxy</li>
+    
+        <li> <em>handler</em>  : handle to call when a property is missing</li>
+    
+        <li> <em>proto</em>  : </li>
+    
+        <li> <em>opts</em> <code>Object</code> : prototype to assign to the proxy</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Proxy</code> a proxy</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj,handler,proto){
+   proto = proto || {};
+   return  Proxy.create(merge(handlerMaker(obj), noSuchMethodHandler(obj, handler)), comb.isHash(proto) ? proto : proto.prototype);
+}
+    </pre>
+    
+
+
+    
+
+
+        
+    <a name="comb_plugins_MethodMissing"></a>
+    <div class="navbar subnav">
+    <div class="navbar-inner  subnav-inner">
+          <div class="container">
+            <a href="#" class="brand">
+            comb.plugins.MethodMissing
+            
+                    
+             <span class="label label-success">Public</span>
+                    
+            
+            </a>
+           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </a>
+                    <div class="nav-collapse">
+
+            <ul class="nav pull-right">
+             <li><a href="#comb_plugins_MethodMissing_constructor">Constructor</a></li>
+                        
+                        
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Static Methods<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a href="#comb_plugins_MethodMissing_getMissingProperty">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                                getMissingProperty
+                                </a></li>
+                                
+                                <li><a href="#comb_plugins_MethodMissing_setMissingProperty">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                                setMissingProperty
+                                </a></li>
+                                
+                            </ul>
+                        </li>
+                        
+                        
+            </ul>
+            </div>
+            </div>
+     </div>
 </div>
 
 
-<h3>comb Proxy helper functions</h3>
 
-<p>comb-proxy adds serveral methods to ease the use of the Proxy API</p>
-
+    <p>
+This plugin exposes two instance properties:
 <ul>
-<li>comb.handlerProxy(obj, prox, proto?) : creates a simple proxy around an object</li>
-<li>comb.methodMissing(obj, handler, proto?) : creates a method/propery missing wrapper</li>
-</ul><div class="highlight">
-<pre><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{</span><span class="nx">hello</span><span class="o">:</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="s2">"hello"</span><span class="p">},</span> <span class="nx">world</span><span class="o">:</span><span class="s2">"world"</span><span class="p">};</span>
-<span class="kd">var</span> <span class="nx">xHandler</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">methodMissing</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
-              <span class="c1">//you can do more interesting stuff in here!</span>
-           <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-               <span class="k">return</span> <span class="p">[</span><span class="nx">m</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span><span class="nx">comb</span><span class="p">.</span><span class="nx">argsToArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">));</span>
-           <span class="p">}</span>
-<span class="p">});</span>
-<span class="nx">xHandler</span><span class="p">.</span><span class="nx">hello</span><span class="p">();</span> <span class="c1">//=&gt; "hello"</span>
-<span class="nx">xHandler</span><span class="p">.</span><span class="nx">world</span> <span class="c1">//=&gt; "world"</span>
-<span class="nx">xHandler</span><span class="p">.</span><span class="nx">someMethod</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="s2">"world"</span><span class="p">);</span> <span class="c1">//=&gt; [ 'someMethod', 'hello', 'world' ]</span>
-</pre>
-</div>
+    <li><b>getMissingProperty</b> method called when a property is being retrieved and is not found on the current instance</li>
+    <li><b>setMissingProperty</b> method called when a property is being set and the property is not found on the current instance</li>
+</ul></p>
+    
+        <em>Example</em>
+            <pre class="prettyprint linenums lang-js">
+var MyClass = comb.define(comb.plugins.MethodMissing, {
+    instance : {
+
+        constructor : function(){
+             this._attributes = {};
+        },
+
+        getMissingProperty : function(name){
+            return this._attributes[name];
+        },
+
+        setMissingProperty : function(name, value){
+            return this._attributes[name] = value;
+        }
+    }
+});
+            </pre>
+    
+
+    
+
+    
+    
+
+    <a name="comb_plugins_MethodMissing_constructor"></a>
+    <h3>Constructor</h3>
+
+    <em>Defined </em>
+    
+    
+    
+
+  
+    <a name="comb_plugins_MethodMissing_getMissingProperty"></a>
+    <h3>
+        getMissingProperty
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined </em>
+
+<p>
+Method called to retrieve a property that is not found on the current instance of the object
+</p>
 
 
-<ul>
-<li>comb.isProxy(obj) : tests if something is a proxy</li>
-<li>comb.createFunctionWrapper(obj, handler, constructTrap, proto) : creates a function wrapper around an object</li>
-</ul><div class="highlight">
-<pre>
-<span class="c1">//create an object that can use properties or as a function through the new operator                               </span>
-<span class="kd">var</span> <span class="nx">MyObject</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span>                                                                                 
-    <span class="nx">instance</span> <span class="o">:</span> <span class="p">{</span>                                                                                                   
-        <span class="nx">hello</span> <span class="o">:</span> <span class="s2">"hello"</span><span class="p">,</span>                                                                                           
-        <span class="nx">constructor</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>                                                                                  
-            <span class="k">this</span><span class="p">.</span><span class="nx">args</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">argsToArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>                                                               
-        <span class="p">}</span>                                                                                                          
-    <span class="p">}</span>                                                                                                              
-<span class="p">});</span>                                                                                                                
-
-<span class="c1">//NOTE: this will not work properly for native objects like Date.                                                  </span>
-<span class="kd">var</span> <span class="nx">createNewMyObject</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>                                                                                
-   <span class="k">try</span> <span class="p">{</span>                                                                                                           
-     <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyObject</span><span class="p">();</span>                                                                                           
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ignore</span><span class="p">)</span> <span class="p">{</span>                                                                                             
-         <span class="c1">//ignore the error because its probably from missing arguments                                            </span>
-    <span class="p">}</span>                                                                                                              
-    <span class="c1">//Now lets take care of arguments supplied!!!                                                                  </span>
-    <span class="nx">MyObject</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">argsToArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">));</span>                                                                
-    <span class="k">return</span> <span class="nx">p</span><span class="p">;</span>                                                                                                      
-<span class="p">};</span>                                                                                                                 
-
-<span class="c1">//This example creates an object with a world property but its not a function!                                     </span>
-<span class="kd">var</span> <span class="nx">handle</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">createFunctionWrapper</span><span class="p">({</span><span class="nx">world</span> <span class="o">:</span> <span class="s2">"world"</span><span class="p">},</span> <span class="nx">createNewMyObject</span><span class="p">,</span> <span class="nx">createNewMyObject</span><span class="p">);</span>                  
-
-<span class="nx">handle</span><span class="p">.</span><span class="nx">world</span> <span class="c1">//=&gt; "world"                                                                                          </span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">handle</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>                                                                                                 
-<span class="nx">a</span><span class="p">.</span><span class="nx">hello</span><span class="p">;</span>  <span class="c1">//=&gt;"hello"                                                                                              </span>
-<span class="nx">a</span><span class="p">.</span><span class="nx">args</span><span class="p">;</span> <span class="c1">//=&gt; [1];                                                                                                  </span>
-<span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">handle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>                                                                                               
-<span class="nx">a</span><span class="p">.</span><span class="nx">hello</span><span class="p">;</span> <span class="c1">//=&gt;"hello"                                                                                               </span>
-<span class="nx">a</span><span class="p">.</span><span class="nx">args</span><span class="p">;</span> <span class="c1">//=&gt; [1,2];                                                                                                </span>
-</pre>
-</div>
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>name</em>  : the name of the property to retrieve.</li>
+    
+     </ul>
 
 
-<h3>comb.executeInOrder</h3>
-
-<p>Comb Proxy adds a method called comb.executeInOrder which allows you to write async code in a synchronous manner using proxies.</p>
-
-<div class="highlight">
-<pre><span class="kd">var</span> <span class="nx">comb</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"comb-proxy"</span><span class="p">);</span>
-
-<span class="c1">//create a funciton that executes synchronously</span>
-<span class="kd">var</span> <span class="nx">staticValueFunction</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>                                                                                                  
-     <span class="k">return</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">argsToArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">" "</span><span class="p">);</span>                                                                                            
-<span class="p">};</span>                                                                                                                                            
-
-<span class="c1">//an async version of the same code                 </span>
-<span class="kd">var</span> <span class="nx">promiseValueFunction</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>                                                                                                 
-     <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">Promise</span><span class="p">();</span>                                                                                                            
-     <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">comb</span><span class="p">.</span><span class="nx">hitch</span><span class="p">(</span><span class="nx">ret</span><span class="p">,</span> <span class="s2">"callback"</span><span class="p">,</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">argsToArray</span><span class="p">(</span><span class="nx">arguments</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">" "</span><span class="p">)),</span> <span class="mi">100</span><span class="p">);</span>                                                     
-     <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>                                                                                                                              
-<span class="p">};</span>                                                                                                                                            
-
-<span class="c1">//You can also pass in objects to execute in order</span>
-<span class="kd">var</span> <span class="nx">hash</span> <span class="o">=</span> <span class="p">{</span>                                                                                                                                  
-     <span class="nx">staticValueFunction</span><span class="o">:</span><span class="nx">staticValueFunction</span><span class="p">,</span>                                                                                                 
-     <span class="nx">promiseValueFunction</span><span class="o">:</span><span class="nx">promiseValueFunction</span>                                                                                                
-<span class="p">};</span>                                                                                                                                            
-
-<span class="c1">//Pass in each function/object you wish to proxy      </span>
-<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">executeInOrder</span><span class="p">(</span><span class="nx">hash</span><span class="p">,</span> <span class="nx">staticValueFunction</span><span class="p">,</span> <span class="nx">promiseValueFunction</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">hash</span><span class="p">,</span> <span class="nx">staticValueFunction</span><span class="p">,</span> <span class="nx">promiseValueFunction</span><span class="p">)</span> <span class="p">{</span>     
-    <span class="c1">//in here you can just use the methods as if they were synchronous</span>
-    <span class="kd">var</span> <span class="nx">toBe</span> <span class="o">=</span> <span class="nx">staticValueFunction</span><span class="p">(</span><span class="nx">promiseValueFunction</span><span class="p">(</span><span class="s2">"to"</span><span class="p">),</span> <span class="s2">"be"</span><span class="p">);</span>                                                                         
-    <span class="kd">var</span> <span class="nx">notToBe</span> <span class="o">=</span> <span class="nx">hash</span><span class="p">.</span><span class="nx">promiseValueFunction</span><span class="p">(</span><span class="s2">"or"</span><span class="p">,</span> <span class="nx">hash</span><span class="p">.</span><span class="nx">staticValueFunction</span><span class="p">(</span><span class="s2">"not"</span><span class="p">,</span> <span class="nx">toBe</span><span class="p">));</span>                                                     
-    <span class="k">return</span> <span class="nx">hash</span><span class="p">.</span><span class="nx">promiseValueFunction</span><span class="p">(</span><span class="nx">toBe</span><span class="p">,</span> <span class="nx">notToBe</span><span class="p">);</span>                                                                                          
-<span class="p">});</span> 
-<span class="c1">//listen for the results</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">addCallback</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ret</span><span class="p">){</span>                                                                                                                  
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ret</span><span class="p">);</span> <span class="c1">//=&gt;"to be or not to be"                                                                                                </span>
-<span class="p">});</span>                                                                                                                                           
-</pre>
-</div>
 
 
-<h3>comb.plugins.MethodMissing</h3>
-
-<p>comb-proxy also adds a MethodMissing plugin to be used with objects to similate method missing calls.</p>
-
-<div class="highlight">
-<pre><span class="kd">var</span> <span class="nx">comb</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"comb-proxy"</span><span class="p">)</span>
-
-<span class="c1">//Example use with a builder</span>
-<span class="kd">var</span> <span class="nx">Builder</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="nx">comb</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">MethodMissing</span><span class="p">,</span> <span class="p">{</span>
-
-    <span class="nx">instance</span><span class="o">:</span><span class="p">{</span>
-
-        <span class="nx">__WITH_REGEX</span><span class="o">:</span><span class="sr">/^with(\w+)/</span><span class="p">,</span>
-
-        <span class="nx">__GET_REGEX</span><span class="o">:</span><span class="sr">/^get(\w+)(\d+)/</span><span class="p">,</span>
-
-        <span class="nx">_attributes</span><span class="o">:</span><span class="kc">null</span><span class="p">,</span>
-
-        <span class="nx">constructor</span><span class="o">:</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">_attributes</span> <span class="o">=</span> <span class="p">{};</span>
-        <span class="p">},</span>
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (name){
+   //return defaults
+   return undefined;
+           
+}
+    </pre>
+    
 
 
-        <span class="nx">getMissingProperty</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__GET_REGEX</span><span class="p">);</span>            
-            <span class="k">if</span> <span class="p">(</span><span class="nx">match</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">//if it starts with get and ends with an integer</span>
-                <span class="c1">//then we'll assume you are looking for a subbuilder</span>
-                <span class="kd">var</span> <span class="nx">prop</span> <span class="o">=</span> <span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-                <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="s2">"_"</span> <span class="o">+</span> <span class="nx">prop</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">prop</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"s"</span><span class="p">][</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">match</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">((</span><span class="nx">match</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__WITH_REGEX</span><span class="p">))</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">){</span>
-                <span class="c1">//setting an attribute</span>
-                <span class="kd">var</span> <span class="nx">prop</span> <span class="o">=</span> <span class="nx">match</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-                <span class="k">return</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">hitch</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
-                    <span class="k">this</span><span class="p">.</span><span class="nx">_attributes</span><span class="p">[</span><span class="nx">prop</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">prop</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
-                    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
-                <span class="p">});</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
+  
+    <a name="comb_plugins_MethodMissing_setMissingProperty"></a>
+    <h3>
+        setMissingProperty
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
 
-    <span class="kr">static</span><span class="o">:</span><span class="p">{</span>
-        <span class="nx">create</span><span class="o">:</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-          <span class="c1">//return a new instance of this</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="k">this</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">});</span>  
+<hr/>
+<em>Defined </em>
 
-<span class="kd">var</span> <span class="nx">PostBuilder</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="nx">Builder</span><span class="p">,</span> <span class="p">{</span>
-     <span class="nx">instance</span> <span class="o">:</span> <span class="p">{</span>
-       <span class="nx">constructor</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">date</span><span class="p">){</span>
-          <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>          
-          <span class="k">this</span><span class="p">.</span><span class="nx">_attributes</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="nx">title</span> <span class="o">:</span> <span class="nx">title</span> <span class="o">||</span> <span class="s2">""</span><span class="p">,</span>
-            <span class="nx">text</span> <span class="o">:</span> <span class="nx">text</span> <span class="o">||</span> <span class="s2">""</span><span class="p">,</span>
-            <span class="nx">date</span> <span class="o">:</span> <span class="nx">date</span> <span class="o">||</span> <span class="kc">null</span>
-          <span class="p">}</span>
-       <span class="p">}</span>             
-     <span class="p">}</span>          
-<span class="p">});</span>
-
-<span class="kd">var</span> <span class="nx">BlogBuilder</span> <span class="o">=</span> <span class="nx">comb</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="nx">Builder</span><span class="p">,</span> <span class="p">{</span>
-  <span class="nx">instance</span> <span class="o">:</span> <span class="p">{</span>
-       <span class="nx">constructor</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
-          <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>          
-          <span class="k">this</span><span class="p">.</span><span class="nx">_posts</span> <span class="o">=</span> <span class="p">[];</span>
-          <span class="k">this</span><span class="p">.</span><span class="nx">_attributes</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="nx">title</span> <span class="o">:</span> <span class="s2">""</span>
-          <span class="p">}</span>
-       <span class="p">},</span>
-
-       <span class="c1">//add a method for adding new posts</span>
-       <span class="nx">withPost</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">post</span><span class="p">){</span>
-          <span class="k">this</span><span class="p">.</span><span class="nx">_posts</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
-       <span class="p">}</span>
-     <span class="p">},</span>
-
-     <span class="kr">static</span> <span class="o">:</span> <span class="p">{</span>              
-
-       <span class="c1">//a helper to create a new builder with a post</span>
-       <span class="nx">createWithPost</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">blogTitle</span><span class="p">,</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">date</span><span class="p">){</span>
-         <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">create</span><span class="p">()</span>
-                      <span class="p">.</span><span class="nx">withTitle</span><span class="p">(</span><span class="nx">blogTitle</span><span class="p">)</span>
-                      <span class="p">.</span><span class="nx">withPost</span><span class="p">(</span><span class="nx">PostBuilder</span><span class="p">.</span><span class="nx">create</span><span class="p">()</span>
-                                            <span class="p">.</span><span class="nx">withTitle</span><span class="p">(</span><span class="nx">title</span><span class="p">)</span>
-                                            <span class="p">.</span><span class="nx">withText</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span>
-                                            <span class="p">.</span><span class="nx">withDate</span><span class="p">(</span><span class="nx">date</span><span class="p">));</span>
-       <span class="p">}</span>
-     <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="c1">//create a new blog</span>
-<span class="kd">var</span> <span class="nx">blogBuilder</span> <span class="o">=</span> <span class="nx">BlogBuilder</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">"MyBlog"</span><span class="p">,</span> <span class="s2">"Post1"</span><span class="p">,</span> <span class="s2">"Hello Word"</span><span class="p">,</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">());</span>
-<span class="c1">//acces post with dynamic getter</span>
-<span class="kd">var</span> <span class="nx">postBuilder</span> <span class="o">=</span> <span class="nx">blogBuilder</span><span class="p">.</span><span class="nx">getPostBuilder1</span><span class="p">.</span><span class="nx">withTitle</span><span class="p">(</span><span class="s2">"Changed Title"</span><span class="p">);</span>
-
-</pre>
-</div>
+<p>
+Method called to set a property that is not found on the current instance of the object
+</p>
 
 
-<h2>License</h2>
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>name</em>  : the name of the property to set.</li>
+    
+        <li> <em>value</em>  : the value to set the property to.</li>
+    
+     </ul>
 
-<p>MIT <a href="https://github.com/Pollenware/comb/raw/master/LICENSE">https://github.com/Pollenware/comb/raw/master/LICENSE</a></p>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (name,value){
+   //return defaults
+   return this[name] = value;
+           
+}
+    </pre>
+    
+
+
+  
+  
+
+        
+  <h2>License</h2>
+
+<p>MIT <a href = https://github.com/Pollenware/comb-proxy/raw/master/LICENSE>LICENSE</a><p>
 
 <h2>Meta</h2>
+<hr>
+<p>Code: <code>git clone git://github.com/Pollenware/comb-proxy.git</code></br></p>
 
-<ul>
-<li>Code: <code>git clone git://github.com/pollenware/comb-proxy.git</code>
-</li>
-<li>JsDoc: <a href="http://pollenware.github.com/comb-proxy">http://pollenware.github.com/comb-proxy</a>
-</li>
-<li>Website:  <a href="http://pollenware.com">http://pollenware.com</a> - Twitter: <a href="http://twitter.com/pollenware">http://twitter.com/pollenware</a> - 877.465.4045</li>
-</ul>
-      </section>
-
+        </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
-    
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
+    <script type="text/javascript"
+            src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+
   </body>
 </html>
+
