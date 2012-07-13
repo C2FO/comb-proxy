@@ -11,7 +11,7 @@
         "node-proxy" : ">=0.6.0"
     },
     "devDependencies" : {
-        "comb" : ">=0.1.0"
+        "comb" : ">=0.1.2"
     },
     "author": "Doug Martin (http://pollenware.github.com)",
     "main": "index.js",
