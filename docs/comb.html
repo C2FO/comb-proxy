@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>comb-proxy</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="./assets/js/google-code-prettify/prettify.css">
+    <style type="text/css">
+        
+
+.subnav-inner {
+    width: 100%;
+    height: 36px;
+    background-color: #EEE;
+    background-repeat: repeat-x;
+    background-image: -moz-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, whiteSmoke), color-stop(100%, #EEE));
+    background-image: -webkit-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    background-image: -ms-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    background-image: -o-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#f5f5f5', endColorstr = '#eeeeee', GradientType = 0);
+    background-image: linear-gradient(top, whiteSmoke 0%, #EEE 100%);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.subnav .nav > li > a:hover {
+    color: black !important;
+}
+
+.subnav .nav li.dropdown .dropdown-toggle .caret,
+.subnav .nav li.dropdown.open .caret {
+    border-top-color: #999 !important;
+    border-bottom-color: #999 !important;
+}
+
+.subnav-fixed {
+    position: fixed;
+    width : 90%;
+    margin-right: auto;
+    margin-left: auto;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 1020;
+    border-color: #D5D5D5;
+    border-width: 0 0 1px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+    -moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.navbar .nav  .dropdown-menu {
+    max-height: 500px;
+    overflow: auto;
+}​
+
+    </style>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <script type="text/javascript">
+        var init = (function () {
+            "use strict";
+
+            var processScroll = (function () {
+                var curr = null, prev = null;
+                return function (nav) {
+                    var $win = $(window);
+                    $('.subnav').each(function () {
+                        var nav = $(this);
+                        var navTop = nav.offset().top - 40;
+                        var scrollTop = $win.scrollTop();
+                        if (scrollTop >= navTop && curr != nav) {
+                            if(curr){
+                                curr.removeClass('subnav-fixed')
+                                prev = curr;
+                            }
+                            curr = nav;
+                            curr.addClass('subnav-fixed')
+                        } else if (curr == nav && scrollTop <= navTop) {
+                            curr.removeClass('subnav-fixed');
+                            prev.addClass('subnav-fixed');
+                            curr = prev;
+                        }else{
+                            nav.removeClass('subnav-fixed');
+                        }
+                    });
+                };
+            })();
+
+            return function () {
+                window.prettyPrint && prettyPrint();
+                $(".collapse").collapse();
+                // fix sub nav on scroll
+                processScroll();
+                $(window).on('scroll', processScroll)
+            }
+        })();
+    </script>
+</head>
+<body onload="init()">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+      
+          <a href="./index.html" class="brand">comb-proxy</a>
+      
+      <div class="nav-collapse">
+      <ul class="nav nav-pills">
+      
+
+      
+        <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+           <ul class="dropdown-menu">
+             
+                         <li><a href="comb.html">comb</a></li>
+               
+           </ul>
+           </li>
+        
+        
+           <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+           <ul class="dropdown-menu">
+             
+                         <li><a href="./comb_plugins_MethodMissing.html">comb.plugins.MethodMissing</a></li>
+               
+           </ul>
+        </li>
+       
+      </ul>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+    <a name="top"></a>
+    <div class="container">
+
+
+
+    <a name=""></a>
+    <div class="navbar subnav">
+    <div class="navbar-inner  subnav-inner">
+                  <div class="container">
+                    <a href="#" class="brand">
+                                comb
+                                
+                                
+                                        
+                                 <span class="label label-success">Public</span>
+                                        
+                                
+                    </a>
+                   <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                            </a>
+
+                            <div class="nav-collapse">
+            
+            <ul class="nav pull-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Methods<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    
+                    <li><a href="./comb.html#.createFunctionWrapper">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        createFunctionWrapper
+                     </a></li>
+                    
+                    <li><a href="./comb.html#.executeInOrder">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        executeInOrder
+                     </a></li>
+                    
+                    <li><a href="./comb.html#.handlerProxy">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        handlerProxy
+                     </a></li>
+                    
+                    <li><a href="./comb.html#.isProxy">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        isProxy
+                     </a></li>
+                    
+                    <li><a href="./comb.html#.methodMissing">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                        methodMissing
+                     </a></li>
+                    
+                </ul>
+            </li>
+            </ul>
+            
+            </div>
+            </div>
+     </div>
+</div>
+<em>Defined index.js</em>
+
+<p>
+Alias for comb.</p>
+
+
+
+
+
+    
+    
+        <a name=".createFunctionWrapper"></a>
+    <h3>
+        createFunctionWrapper
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined proxy.js</em>
+
+<p>
+Creates a function proxy for an object.
+
+</p>
+
+    <em>Example</em>
+        <pre class="prettyprint linenums lang-js">
+//create an object that can use properties or as a function through the new operator
+var MyObject = comb.define(null, {
+    instance : {
+        hello : &quot;hello&quot;,
+        constructor : function(){
+            this.args = comb.argsToArray(arguments);
+        }
+    }
+});
+
+//NOTE: this will not work properly for native objects like Date.
+var createNewMyObject = function(){
+   try {
+     p = new MyObject();
+    } catch (ignore) {
+         //ignore the error because its probably from missing arguments
+    }
+    //Now lets take care of arguments supplied!!!
+    MyObject.apply(p, comb.argsToArray(arguments));
+    return p;
+};
+
+//This example creates an object with a world property but its not a function!
+var handle = comb.createFunctionWrapper({world : &quot;world&quot;}, createNewMyObject, createNewMyObject);
+
+handle.world //=&gt; &quot;world&quot;
+var a = handle(1);
+a.hello;  //=&gt;&quot;hello&quot;
+a.args; //=&gt; [1];
+a = new handle(1,2);
+a.hello; //=&gt;&quot;hello&quot;
+a.args; //=&gt; [1,2];
+        </pre>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : the object to proxy</li>
+    
+        <li> <em>handler</em>  : the handler to call when the object is used as a function</li>
+    
+        <li> <em>constructTrap</em>  : the funciton to use when using new on the object</li>
+    
+        <li> <em>opts</em>  : the prototype of the object.</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj,handler,constructTrap,opts){
+   var args = comb.argsToArray(arguments), ret;
+   if (args.length != 4) {
+       opts = comb.isHash(args[args.length - 1]) ? args.pop() : null;
+       constructTrap = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
+       handler = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
+   }
+   if (comb.isUndefined(obj)) throw new Error(&quot;obj required when using create function wrapper&quot;);
+   if (comb.isFunction(constructTrap) &amp;&amp; !comb.isFunction(handler)) {
+       ret = Proxy.createFunction(handlerMaker(obj), constructTrap);
+   } else {
+       ret = Proxy.createFunction(handlerMaker(obj), handler, constructTrap);
+   }
+   if (opts) {
+       Proxy.setPrototype(ret, comb.isHash(opts) ? opts : opts.prototype);
+   }
+   return ret;
+}
+    </pre>
+    
+
+
+    
+        <a name=".executeInOrder"></a>
+    <h3>
+        executeInOrder
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined promise.js</em>
+
+<p>
+This method allows one to code asynchronous code in a synchronous manner.
+
+<p>
+    <b>
+    Using Object.define[rest of name] on objects passed will result in unexpected behavior.</br>
+    Enumerating passed in object keys is not currently supported. i.e for in loops on objects.
+    using array enumeration methods will work though!!
+    </b>
+</p>
+
+</p>
+
+    <em>Example</em>
+        <pre class="prettyprint linenums lang-js">
+var staticValueFunction = function (value) {
+     return comb.argsToArray(arguments).join(&quot; &quot;);
+};
+
+var promiseValueFunction = function (value) {
+     var ret = new comb.Promise();
+     setTimeout(comb.hitch(ret, &quot;callback&quot;, comb.argsToArray(arguments).join(&quot; &quot;)), 100);
+     return ret;
+};
+
+var hash = {
+     staticValueFunction:staticValueFunction,
+     promiseValueFunction:promiseValueFunction
+};
+
+var p = comb.executeInOrder(hash, staticValueFunction, promiseValueFunction, function (hash, staticValueFunction, promiseValueFunction) {
+    var toBe = staticValueFunction(promiseValueFunction(&quot;to&quot;), &quot;be&quot;);
+    var notToBe = hash.promiseValueFunction(&quot;or&quot;, hash.staticValueFunction(&quot;not&quot;, toBe));
+    return hash.promiseValueFunction(toBe, notToBe);
+});
+p.addCallback(function(ret){
+    console.log(ret); //=&gt;&quot;to be or not to be&quot;
+});
+        </pre>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>args</em>  : variable number of objects.</li>
+    
+        <li> <em>cb</em>  : the function to callback to execute in order</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li>  comb.Promise</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (args,cb){
+   args = comb.argsToArray(arguments);
+   cb = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
+   var ret = new Promise();
+   if (cb) {
+       var stack = [];
+       var newArgs = args.map(function (a) {
+           return [a, getHandler(a, stack)];
+       });
+       var cbRet = cb.apply(null, newArgs.map(function (h) {
+           return h[1];
+       }));
+       executeStack(stack, newArgs).then(function (results, pMap) {
+           if (comb.isUndefined(cbRet)) {
+               ret.callback(results);
+           }
+           else {
+               var cbResults;
+               if (comb.isArray(cbRet)) {
+                   cbResults = cbRet.map(
+                       function (arg) {
+                           return getValueFromArrayMap(arg, pMap, newArgs);
+                       }).filter(function (r) {
+                           return !comb.isUndefined(r)
+                       });
+               } else if (comb.isHash(cbRet)) {
+                   cbResults = {};
+                   for (var i in cbRet) {
+                       cbResults[i] = getValueFromArrayMap(cbRet[i], pMap, newArgs);
+                   }
+               } else if (comb.isProxy(cbRet)) {
+                   cbResults = getValueFromArrayMap(cbRet, pMap, newArgs);
+               } else {
+                   cbResults = cbRet;
+               }
+               ret.callback(cbResults);
+           }
+       }, hitch(ret, &quot;errback&quot;));
+   } else {
+       ret.callback();
+   }
+   return ret;
+       
+}
+    </pre>
+    
+
+
+    
+        <a name=".handlerProxy"></a>
+    <h3>
+        handlerProxy
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined proxy.js</em>
+
+<p>
+Creates a proxy for an object.
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : object to proxy</li>
+    
+        <li> <em>opts</em>  : object with methods to define on the handler.</li>
+    
+        <li> <em>proto</em>  : </li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj,opts,proto){
+   opts = opts || {};
+   if (comb.isUndefined(proto)) {
+       return  Proxy.create(merge(handlerMaker(obj), opts));
+   } else {
+       return  Proxy.create(merge(handlerMaker(obj), opts), comb.isHash(proto) ? proto : proto.prototype);
+   }
+}
+    </pre>
+    
+
+
+    
+        <a name=".isProxy"></a>
+    <h3>
+        isProxy
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined proxy.js</em>
+
+<p>
+ Determines if the object is a proxy or not.
+
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : object to test</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Boolean</code> true if it is a proxy false otherwise</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj){
+   var undef;
+   return obj !== undef &amp;&amp; obj !== null &amp;&amp; Proxy.isProxy(obj);
+}
+    </pre>
+    
+
+
+    
+        <a name=".methodMissing"></a>
+    <h3>
+        methodMissing
+        
+        <span class="label label-info">Static</span>
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined proxy.js</em>
+
+<p>
+Creates a method missing proxy for an object.
+<b>NOTE:</b> This method does not gurantee that the property will be used as a function call.
+
+</p>
+
+    <em>Example</em>
+        <pre class="prettyprint linenums lang-js">
+var x = {hello:function () {return &quot;hello&quot;}, world:&quot;world&quot;};
+ var xHandler = comb.methodMissing(x, function (m) {
+             //you can do more interesting stuff in here!
+              return function () {
+                  return [m].concat(comb.argsToArray(arguments));
+              }
+  });
+ xHandler.hello(); //=&gt; &quot;hello&quot;
+ xHandler.world //=&gt; &quot;world&quot;
+ xHandler.someMethod(&quot;hello&quot;, &quot;world&quot;); //=&gt; [ &#x27;someMethod&#x27;, &#x27;hello&#x27;, &#x27;world&#x27; ]
+        </pre>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>obj</em>  : object to wrap with a method missing proxy</li>
+    
+        <li> <em>handler</em>  : handle to call when a property is missing</li>
+    
+        <li> <em>proto</em>  : </li>
+    
+        <li> <em>opts</em> <code>Object</code> : prototype to assign to the proxy</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Proxy</code> a proxy</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (obj,handler,proto){
+   proto = proto || {};
+   return  Proxy.create(merge(handlerMaker(obj), noSuchMethodHandler(obj, handler)), comb.isHash(proto) ? proto : proto.prototype);
+}
+    </pre>
+    
+
+
+    
+<hr>
+
+    
+  <h2>License</h2>
+
+<p>MIT <a href = https://github.com/Pollenware/comb-proxy/raw/master/LICENSE>LICENSE</a><p>
+
+<h2>Meta</h2>
+<hr>
+<p>Code: <code>git clone git://github.com/Pollenware/comb-proxy.git</code></br></p>
+
+
+
+</div>
+</div>
+<script type="text/javascript" src="./assets/js/jquery.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-transition.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-tab.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-popover.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-button.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-collapse.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap-carousel.js"></script>
+<script type="text/javascript"
+        src="./assets/js/google-code-prettify/prettify.js"></script>
+
+</body>
+</html>
+

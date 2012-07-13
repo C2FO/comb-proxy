@@ -159,31 +159,209 @@
 
 
 
+    <a name=""></a>
+    <div class="navbar subnav">
+    <div class="navbar-inner  subnav-inner">
+          <div class="container">
+            <a href="#" class="brand">
+            comb.plugins.MethodMissing
+            
+                    
+             <span class="label label-success">Public</span>
+                    
+            
+            </a>
+           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </a>
+                    <div class="nav-collapse">
 
-  <h1>comb-proxy</h1>
+            <ul class="nav pull-right">
+             <li><a href="#constructor">Constructor</a></li>
+                        
+                        
+                        
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Instance Methods<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a href="./comb_plugins_MethodMissing.html#getMissingProperty">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                                getMissingProperty
 
-<h2>Overview</h2>
+                                </a></li>
+                                
+                                <li><a href="./comb_plugins_MethodMissing.html#setMissingProperty">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                        
+                                 <span class="label label-success">P</span>
+                                        
+                                
+                                setMissingProperty
+
+                                </a></li>
+                                
+                            </ul>
+                        </li>
+                        
+            </ul>
+            </div>
+            </div>
+     </div>
+</div>
+
+
+
+    <p>
+This plugin exposes two instance properties:
+<ul>
+    <li><b>getMissingProperty</b> method called when a property is being retrieved and is not found on the current instance</li>
+    <li><b>setMissingProperty</b> method called when a property is being set and the property is not found on the current instance</li>
+</ul></p>
+    
+        <em>Example</em>
+            <pre class="prettyprint linenums lang-js">
+var MyClass = comb.define(comb.plugins.MethodMissing, {
+    instance : {
+
+        constructor : function(){
+             this._attributes = {};
+        },
+
+        getMissingProperty : function(name){
+            return this._attributes[name];
+        },
+
+        setMissingProperty : function(name, value){
+            return this._attributes[name] = value;
+        }
+    }
+});
+            </pre>
+    
+
+    
+
+    
+    
+
+    <a name="constructor"></a>
+    <h3>Constructor</h3>
+
+    <em>Defined plugins/MethodMissing.js</em>
+    
+    
+    
+
+  
+  
+    <a name="getMissingProperty"></a>
+    <h3>
+        getMissingProperty
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined plugins/MethodMissing.js</em>
+
 <p>
-     Comb-proxy is plugin for comb to expose ProxyHelpers.
+Method called to retrieve a property that is not found on the current instance of the object
 </p>
 
-<h2> Installation</h2>
 
-<pre class='prettyprint linenums lang-js'>
- npm install comb-proxy
-</pre>
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>name</em>  : the name of the property to retrieve.</li>
+    
+     </ul>
 
 
-<h2>Usage</h2>
 
-To initialize comb-proxy simply require it.
 
-<pre class='prettyprint linenums lang-js'>
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (name){
+   //return defaults
+   return undefined;
+           
+}
+    </pre>
+    
 
-var comb = require("comb-proxy");
 
-</pre>
+  
+    <a name="setMissingProperty"></a>
+    <h3>
+        setMissingProperty
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
 
+<hr/>
+<em>Defined plugins/MethodMissing.js</em>
+
+<p>
+Method called to set a property that is not found on the current instance of the object
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>name</em>  : the name of the property to set.</li>
+    
+        <li> <em>value</em>  : the value to set the property to.</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (name,value){
+   //return defaults
+   return this[name] = value;
+           
+}
+    </pre>
+    
+
+
+  
 <hr>
 
     
@@ -213,4 +391,3 @@ var comb = require("comb-proxy");
 
 </body>
 </html>
-
