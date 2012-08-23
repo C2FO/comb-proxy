@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/Pollenware/comb-proxy.png)](http://travis-ci.org/Pollenware/comb-proxy)
 <a name="top"></a>
 
 
