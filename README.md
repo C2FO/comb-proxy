@@ -555,11 +555,11 @@ function (name,value){
 
   <h2>License</h2>
 
-<p>MIT <a href = https://github.com/Pollenware/comb-proxy/raw/master/LICENSE>LICENSE</a><p>
+<p>MIT <a href = https://github.com/c2fo/comb-proxy/raw/master/LICENSE>LICENSE</a><p>
 
 <h2>Meta</h2>
 <hr>
-<p>Code: <code>git clone git://github.com/Pollenware/comb-proxy.git</code></br></p>
+<p>Code: <code>git clone git://github.com/c2fo/comb-proxy.git</code></br></p>
 
 
 
