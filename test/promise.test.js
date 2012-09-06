@@ -358,6 +358,6 @@ it.describe("comb#executeInOrder", function (it) {
             });
     });
 
-});
+}).as(module);
 
 
