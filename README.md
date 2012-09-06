@@ -25,8 +25,6 @@ var comb = require("comb-proxy");
 
 ```
 
-<h2>API</h2>
-
 ##Namespaces
 
 
@@ -461,13 +459,13 @@ var MyClass = comb.define(comb.plugins.MethodMissing, {
 
 
 
-*Static*
-
-  * [getMissingProperty](#comb_plugins_MethodMissing_getMissingProperty)
-
-  * [setMissingProperty](#comb_plugins_MethodMissing_setMissingProperty)
 
 
+*Instance*
+
+  * [getMissingProperty](#comb_plugins_MethodMissing_prototype_getMissingProperty)
+
+  * [setMissingProperty](#comb_plugins_MethodMissing_prototype_setMissingProperty)
 
 
 ###Constructor
@@ -478,9 +476,10 @@ var MyClass = comb.define(comb.plugins.MethodMissing, {
 
 
   
-<a name="comb_plugins_MethodMissing_getMissingProperty"></a>
+  
+<a name="comb_plugins_MethodMissing_prototype_getMissingProperty"></a>
 ###getMissingProperty
- _static_  function public
+ function public
 
 
 ---
@@ -513,9 +512,9 @@ function (name){
     
     
   
-<a name="comb_plugins_MethodMissing_setMissingProperty"></a>
+<a name="comb_plugins_MethodMissing_prototype_setMissingProperty"></a>
 ###setMissingProperty
- _static_  function public
+ function public
 
 
 ---
@@ -549,7 +548,6 @@ function (name,value){
 ```
     
     
-  
   
 
 

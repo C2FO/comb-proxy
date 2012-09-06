@@ -80,5 +80,5 @@ it.describe("comb.plugins.MethodMissing", function (it) {
         assert.equal(missing.randomValue, "comb is awesome!");
     });
 
-});
+}).as(module);
 
