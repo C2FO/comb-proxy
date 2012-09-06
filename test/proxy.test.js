@@ -117,5 +117,5 @@ it.describe("Proxy utilities", function (it) {
 
     });
 
-});
+}).as(module);
 
