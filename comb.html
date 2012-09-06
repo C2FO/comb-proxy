@@ -5,70 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>comb-proxy</title>
     <link rel="stylesheet" href="./assets/css/bootstrap.css">
-    <link rel="stylesheet" href="./assets/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="./assets/js/google-code-prettify/prettify.css">
+    <link rel="stylesheet" href="./assets/css/prettify.css">
     <style type="text/css">
         
 
-.subnav-inner {
-    width: 100%;
-    height: 36px;
-    background-color: #EEE;
-    background-repeat: repeat-x;
-    background-image: -moz-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, whiteSmoke), color-stop(100%, #EEE));
-    background-image: -webkit-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
-    background-image: -ms-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
-    background-image: -o-linear-gradient(top, whiteSmoke 0%, #EEE 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#f5f5f5', endColorstr = '#eeeeee', GradientType = 0);
-    background-image: linear-gradient(top, whiteSmoke 0%, #EEE 100%);
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-}
+/*.subnav-inner {*/
+    /*width: 100%;*/
+    /*height: 36px;*/
+    /*background-color: #EEE;*/
+    /*background-repeat: repeat-x;*/
+    /*background-image: -moz-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, whiteSmoke), color-stop(100%, #EEE));*/
+    /*background-image: -webkit-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*background-image: -ms-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*background-image: -o-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#f5f5f5', endColorstr = '#eeeeee', GradientType = 0);*/
+    /*background-image: linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*-webkit-border-radius: 4px;*/
+    /*-moz-border-radius: 4px;*/
+    /*border-radius: 4px;*/
+/*}*/
 
-.subnav .nav > li > a:hover {
-    color: black !important;
-}
+/*.subnav .nav > li > a:hover {*/
+    /*color: black !important;*/
+/*}*/
 
-.subnav .nav li.dropdown .dropdown-toggle .caret,
-.subnav .nav li.dropdown.open .caret {
-    border-top-color: #999 !important;
-    border-bottom-color: #999 !important;
-}
+/*.subnav .nav li.dropdown .dropdown-toggle .caret,*/
+/*.subnav .nav li.dropdown.open .caret {*/
+    /*border-top-color: #999 !important;*/
+    /*border-bottom-color: #999 !important;*/
+/*}*/
 
-.subnav-fixed {
-    position: fixed;
-    width : 90%;
-    margin-right: auto;
-    margin-left: auto;
-    top: 40px;
-    left: 0;
-    right: 0;
-    z-index: 1020;
-    border-color: #D5D5D5;
-    border-width: 0 0 1px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
-    -moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
-    box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
+/*.subnav-fixed {*/
+    /*position: fixed;*/
+    /*width : 90%;*/
+    /*margin-right: auto;*/
+    /*margin-left: auto;*/
+    /*top: 40px;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*z-index: 1020;*/
+    /*border-color: #D5D5D5;*/
+    /*border-width: 0 0 1px;*/
+    /*-webkit-border-radius: 0;*/
+    /*-moz-border-radius: 0;*/
+    /*border-radius: 0;*/
+    /*-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);*/
+    /*-moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);*/
+    /*box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);*/
+/*}*/
 
-.navbar .nav  .dropdown-menu {
-    max-height: 500px;
-    overflow: auto;
-}​
+/*.navbar .nav  .dropdown-menu {*/
+    /*max-height: 500px;*/
+    /*overflow: auto;*/
+/*}​*/
 
     </style>
     <style type="text/css">
         body {
-            padding-top: 60px;
-            padding-bottom: 40px;
+            padding: 90px;
+        }
+
+        .subnav{
+            margin-top: 40px;
+            margin-right: auto;
+            margin-left: auto;
+            z-index: 1000;
+        }
+
+        @media (max-width:979px) {
+            .subnav{
+                margin-top: auto;
+            }
         }
     </style>
+    <link rel="stylesheet" href="./assets/css/bootstrap-responsive.css">
     <script type="text/javascript">
         var init = (function () {
             "use strict";
@@ -79,7 +91,8 @@
                     var $win = $(window);
                     $('.subnav').each(function () {
                         var nav = $(this);
-                        var navTop = nav.offset().top - 40;
+                        var navTop = $win.width() < 980 ? 0 : nav.offset().top - 40;
+
                         var scrollTop = $win.scrollTop();
                         if (scrollTop >= navTop && curr != nav) {
                             if(curr){
@@ -102,59 +115,64 @@
             return function () {
                 window.prettyPrint && prettyPrint();
                 $(".collapse").collapse();
+                var $window = $(window);
+                //$(".subnav").affix ();
                 // fix sub nav on scroll
-                processScroll();
-                $(window).on('scroll', processScroll)
+//                processScroll();
+//                $(window).on('scroll', processScroll)
             }
         })();
     </script>
 </head>
 <body onload="init()">
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-      
-          <a href="./index.html" class="brand">comb-proxy</a>
-      
-      <div class="nav-collapse">
-      <ul class="nav nav-pills">
-      
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"> </span>
+            </a>
+            
+            <a href="./index.html" class="brand">comb-proxy</a>
+            
+            <div class="nav-collapse">
+                <ul class="nav">
+                    
 
-      
-        <li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
-           <ul class="dropdown-menu">
-             
-                         <li><a href="comb.html">comb</a></li>
-               
-           </ul>
-           </li>
-        
-        
-           <li class="dropdown">
-           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
-           <ul class="dropdown-menu">
-             
-                         <li><a href="./comb_plugins_MethodMissing.html">comb.plugins.MethodMissing</a></li>
-               
-           </ul>
-        </li>
-       
-      </ul>
-      
-      <ul class="nav pull-right">
-                  <li><a href="https://github.com/Pollenware/comb-proxy" target="#github" class="pull-right">github</a></li>
-        </ul>
-        
-      </div>
+                        
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="comb.html">comb</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="./comb_plugins_MethodMissing.html">comb.plugins.MethodMissing</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+                
+                <ul class="nav pull-right">
+
+                    <li class="divider-vertical"></li>
+                    <li><a href="https://github.com/c2fo/comb-proxy" target="#github" class="pull-right">github</a></li>
+                </ul>
+                
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
 
 
 <div class="container-fluid">
@@ -164,32 +182,32 @@
 
 
     <a name=""></a>
-    <div class="navbar subnav">
-    <div class="navbar-inner  subnav-inner">
-                  <div class="container">
-                    <a href="#" class="brand">
-                                comb
-                                
-                                
-                                        
-                                 <span class="label label-success">Public</span>
-                                        
-                                
-                    </a>
-                   <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                              <span class="icon-bar"></span>
-                              <span class="icon-bar"></span>
-                              <span class="icon-bar"></span>
-                            </a>
+    <div class="navbar subnav navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a href="#" class="brand">
+                comb
+                
+                
+                
+                <span class="label label-success">Public</span>
+                
+                
+            </a>
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".sub-nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
 
-                            <div class="nav-collapse">
-            
-            <ul class="nav pull-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Methods<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    
-                    <li><a href="./comb.html#.createFunctionWrapper">
+            <div class="nav-collapse sub-nav-collapse">
+                
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Methods<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="./comb.html#.createFunctionWrapper">
                                 
                                 <span class="label label-info">S</span>
                                 
@@ -197,29 +215,14 @@
                                 <span class="label label-label">F</span>
                                 
                                 
-                                        
-                                 <span class="label label-success">P</span>
-                                        
                                 
-                        createFunctionWrapper
-                     </a></li>
-                    
-                    <li><a href="./comb.html#.executeInOrder">
-                                
-                                <span class="label label-info">S</span>
+                                <span class="label label-success">P</span>
                                 
                                 
-                                <span class="label label-label">F</span>
-                                
-                                
-                                        
-                                 <span class="label label-success">P</span>
-                                        
-                                
-                        executeInOrder
-                     </a></li>
-                    
-                    <li><a href="./comb.html#.handlerProxy">
+                                createFunctionWrapper
+                            </a></li>
+                            
+                            <li><a href="./comb.html#.executeInOrder">
                                 
                                 <span class="label label-info">S</span>
                                 
@@ -227,29 +230,14 @@
                                 <span class="label label-label">F</span>
                                 
                                 
-                                        
-                                 <span class="label label-success">P</span>
-                                        
                                 
-                        handlerProxy
-                     </a></li>
-                    
-                    <li><a href="./comb.html#.isProxy">
-                                
-                                <span class="label label-info">S</span>
+                                <span class="label label-success">P</span>
                                 
                                 
-                                <span class="label label-label">F</span>
-                                
-                                
-                                        
-                                 <span class="label label-success">P</span>
-                                        
-                                
-                        isProxy
-                     </a></li>
-                    
-                    <li><a href="./comb.html#.methodMissing">
+                                executeInOrder
+                            </a></li>
+                            
+                            <li><a href="./comb.html#.handlerProxy">
                                 
                                 <span class="label label-info">S</span>
                                 
@@ -257,25 +245,55 @@
                                 <span class="label label-label">F</span>
                                 
                                 
-                                        
-                                 <span class="label label-success">P</span>
-                                        
                                 
-                        methodMissing
-                     </a></li>
-                    
+                                <span class="label label-success">P</span>
+                                
+                                
+                                handlerProxy
+                            </a></li>
+                            
+                            <li><a href="./comb.html#.isProxy">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                isProxy
+                            </a></li>
+                            
+                            <li><a href="./comb.html#.methodMissing">
+                                
+                                <span class="label label-info">S</span>
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                methodMissing
+                            </a></li>
+                            
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-            </ul>
-            
+                
             </div>
-            </div>
-     </div>
+        </div>
+    </div>
 </div>
 <em>Defined index.js</em>
 
-<p>
-Alias for comb.</p>
+<p><p>Alias for comb.</p>
+</p>
 
 
 
@@ -302,9 +320,9 @@ Alias for comb.</p>
 <hr/>
 <em>Defined proxy.js</em>
 
-<p>
-Creates a function proxy for an object.
+<p><p>Creates a function proxy for an object.
 
+</p>
 </p>
 
     <em>Example</em>
@@ -347,13 +365,17 @@ a.args; //=&gt; [1,2];
     <em>Arguments</em>
     <ul>
     
-        <li> <em>obj</em>  : the object to proxy</li>
+        <li> <em>obj</em>  : <p>the object to proxy</p>
+</li>
     
-        <li> <em>handler</em>  : the handler to call when the object is used as a function</li>
+        <li> <em>handler</em>  : <p>the handler to call when the object is used as a function</p>
+</li>
     
-        <li> <em>constructTrap</em>  : the funciton to use when using new on the object</li>
+        <li> <em>constructTrap</em>  : <p>the funciton to use when using new on the object</p>
+</li>
     
-        <li> <em>opts</em>  : the prototype of the object.</li>
+        <li> <em>opts</em>  : <p>the prototype of the object.</p>
+</li>
     
      </ul>
 
@@ -405,9 +427,9 @@ function (obj,handler,constructTrap,opts){
 <hr/>
 <em>Defined promise.js</em>
 
-<p>
-This method allows one to code asynchronous code in a synchronous manner.
+<p><p>This method allows one to code asynchronous code in a synchronous manner.
 
+</p>
 <p>
     <b>
     Using Object.define[rest of name] on objects passed will result in unexpected behavior.</br>
@@ -449,9 +471,11 @@ p.addCallback(function(ret){
     <em>Arguments</em>
     <ul>
     
-        <li> <em>args</em>  : variable number of objects.</li>
+        <li> <em>args</em>  : <p>variable number of objects.</p>
+</li>
     
-        <li> <em>cb</em>  : the function to callback to execute in order</li>
+        <li> <em>cb</em>  : <p>the function to callback to execute in order</p>
+</li>
     
      </ul>
 
@@ -459,7 +483,8 @@ p.addCallback(function(ret){
     <em>Returns</em>
     <ul>
     
-        <li>  comb.Promise</li>
+        <li>  <p>comb.Promise</p>
+</li>
     
     </ul>
 
@@ -536,17 +561,19 @@ function (args,cb){
 <hr/>
 <em>Defined proxy.js</em>
 
-<p>
-Creates a proxy for an object.
+<p><p>Creates a proxy for an object.
+</p>
 </p>
 
 
     <em>Arguments</em>
     <ul>
     
-        <li> <em>obj</em>  : object to proxy</li>
+        <li> <em>obj</em>  : <p>object to proxy</p>
+</li>
     
-        <li> <em>opts</em>  : object with methods to define on the handler.</li>
+        <li> <em>opts</em>  : <p>object with methods to define on the handler.</p>
+</li>
     
         <li> <em>proto</em>  : </li>
     
@@ -590,16 +617,17 @@ function (obj,opts,proto){
 <hr/>
 <em>Defined proxy.js</em>
 
-<p>
- Determines if the object is a proxy or not.
+<p><p> Determines if the object is a proxy or not.
 
+</p>
 </p>
 
 
     <em>Arguments</em>
     <ul>
     
-        <li> <em>obj</em>  : object to test</li>
+        <li> <em>obj</em>  : <p>object to test</p>
+</li>
     
      </ul>
 
@@ -607,7 +635,8 @@ function (obj,opts,proto){
     <em>Returns</em>
     <ul>
     
-        <li> <code>Boolean</code> true if it is a proxy false otherwise</li>
+        <li> <code>Boolean</code> <p>true if it is a proxy false otherwise</p>
+</li>
     
     </ul>
 
@@ -644,10 +673,10 @@ function (obj){
 <hr/>
 <em>Defined proxy.js</em>
 
-<p>
-Creates a method missing proxy for an object.
+<p><p>Creates a method missing proxy for an object.
 <b>NOTE:</b> This method does not gurantee that the property will be used as a function call.
 
+</p>
 </p>
 
     <em>Example</em>
@@ -668,13 +697,16 @@ var x = {hello:function () {return &quot;hello&quot;}, world:&quot;world&quot;};
     <em>Arguments</em>
     <ul>
     
-        <li> <em>obj</em>  : object to wrap with a method missing proxy</li>
+        <li> <em>obj</em>  : <p>object to wrap with a method missing proxy</p>
+</li>
     
-        <li> <em>handler</em>  : handle to call when a property is missing</li>
+        <li> <em>handler</em>  : <p>handle to call when a property is missing</p>
+</li>
     
         <li> <em>proto</em>  : </li>
     
-        <li> <em>opts</em> <code>Object</code> : prototype to assign to the proxy</li>
+        <li> <em>opts</em> <code>Object</code> : <p>prototype to assign to the proxy</p>
+</li>
     
      </ul>
 
@@ -682,7 +714,8 @@ var x = {hello:function () {return &quot;hello&quot;}, world:&quot;world&quot;};
     <em>Returns</em>
     <ul>
     
-        <li> <code>Proxy</code> a proxy</li>
+        <li> <code>Proxy</code> <p>a proxy</p>
+</li>
     
     </ul>
 
@@ -705,27 +738,19 @@ function (obj,handler,proto){
     
   <h2>License</h2>
 
-<p>MIT <a href = https://github.com/Pollenware/comb-proxy/raw/master/LICENSE>LICENSE</a><p>
+<p>MIT <a href = https://github.com/c2fo/comb-proxy/raw/master/LICENSE>LICENSE</a><p>
 
 <h2>Meta</h2>
 <hr>
-<p>Code: <code>git clone git://github.com/Pollenware/comb-proxy.git</code></br></p>
+<p>Code: <code>git clone git://github.com/c2fo/comb-proxy.git</code></br></p>
 
 
 
 </div>
 </div>
 <script type="text/javascript" src="./assets/js/jquery.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-transition.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-dropdown.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-tab.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-tooltip.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-popover.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-button.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-collapse.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap-carousel.js"></script>
-<script type="text/javascript"
-        src="./assets/js/google-code-prettify/prettify.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./assets/js/prettify.js"></script>
 
 </body>
 </html>
