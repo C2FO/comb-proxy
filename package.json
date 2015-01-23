@@ -1,7 +1,7 @@
 {
     "name": "comb-proxy",
     "description": "A framework for node",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "keywords" : ["comb", "Proxy"],
     "repository": {
         "type": "git",
@@ -11,7 +11,8 @@
         "node-proxy" : ">=0.6.0"
     },
     "devDependencies" : {
-        "comb" : ">=0.1.2"
+        "comb" : "~0.4.0",
+        "it": "~0.2.7"
     },
     "author": "Doug Martin (http://c2fo.github.com)",
     "main": "index.js",
