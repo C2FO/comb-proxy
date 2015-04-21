@@ -2,3 +2,5 @@ node_modules
 .DS_store
 *.iml
 lib-cov
+.idea
+atlassian-ide-plugin.xml
