@@ -1,7 +1,7 @@
 {
   "name": "comb-proxy",
   "description": "A framework for node",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "keywords": [
     "comb",
     "Proxy"
@@ -11,7 +11,7 @@
     "url": "git@github.com:C2FO/comb-proxy.git"
   },
   "dependencies": {
-    "node-proxy": "~0.9.0"
+    "node-proxy": "1.0.0"
   },
   "devDependencies": {
     "comb": ">=0.1.2",
