@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>comb-proxy</title>
-    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/prettify.css">
     <style type="text/css">
         
@@ -74,13 +74,18 @@
             z-index: 1000;
         }
 
+        .dropdown-menu{
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
         @media (max-width:979px) {
             .subnav{
                 margin-top: auto;
             }
         }
     </style>
-    <link rel="stylesheet" href="./assets/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap-responsive.min.css">
     <script type="text/javascript">
         var init = (function () {
             "use strict";
@@ -320,9 +325,7 @@
 <hr/>
 <em>Defined proxy.js</em>
 
-<p><p>Creates a function proxy for an object.
-
-</p>
+<p><p>Creates a function proxy for an object.</p>
 </p>
 
     <em>Example</em>
@@ -387,12 +390,14 @@ a.args; //=&gt; [1,2];
     <pre class="prettyprint linenums lang-js">
 function (obj,handler,constructTrap,opts){
    var args = comb.argsToArray(arguments), ret;
-   if (args.length != 4) {
+   if (args.length !== 4) {
        opts = comb.isHash(args[args.length - 1]) ? args.pop() : null;
        constructTrap = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
        handler = comb.isFunction(args[args.length - 1]) ? args.pop() : null;
    }
-   if (comb.isUndefined(obj)) throw new Error(&quot;obj required when using create function wrapper&quot;);
+   if (comb.isUndefined(obj)) {
+       throw new Error(&quot;obj required when using create function wrapper&quot;);
+   }
    if (comb.isFunction(constructTrap) &amp;&amp; !comb.isFunction(handler)) {
        ret = Proxy.createFunction(handlerMaker(obj), constructTrap);
    } else {
@@ -427,9 +432,7 @@ function (obj,handler,constructTrap,opts){
 <hr/>
 <em>Defined promise.js</em>
 
-<p><p>This method allows one to code asynchronous code in a synchronous manner.
-
-</p>
+<p><p>This method allows one to code asynchronous code in a synchronous manner.</p>
 <p>
     <b>
     Using Object.define[rest of name] on objects passed will result in unexpected behavior.</br>
@@ -505,19 +508,17 @@ function (args,cb){
        var cbRet = cb.apply(null, newArgs.map(function (h) {
            return h[1];
        }));
-       executeStack(stack, newArgs).then(function (results, pMap) {
+       executeStack(stack, newArgs).chain(function (results, pMap) {
            if (comb.isUndefined(cbRet)) {
                ret.callback(results);
-           }
-           else {
+           } else {
                var cbResults;
                if (comb.isArray(cbRet)) {
-                   cbResults = cbRet.map(
-                       function (arg) {
-                           return getValueFromArrayMap(arg, pMap, newArgs);
-                       }).filter(function (r) {
-                           return !comb.isUndefined(r)
-                       });
+                   cbResults = cbRet.map(function (arg) {
+                       return getValueFromArrayMap(arg, pMap, newArgs);
+                   }).filter(function (r) {
+                       return !comb.isUndefined(r);
+                   });
                } else if (comb.isHash(cbRet)) {
                    cbResults = {};
                    for (var i in cbRet) {
@@ -561,8 +562,7 @@ function (args,cb){
 <hr/>
 <em>Defined proxy.js</em>
 
-<p><p>Creates a proxy for an object.
-</p>
+<p><p>Creates a proxy for an object.</p>
 </p>
 
 
@@ -588,9 +588,9 @@ function (args,cb){
 function (obj,opts,proto){
    opts = opts || {};
    if (comb.isUndefined(proto)) {
-       return  Proxy.create(merge(handlerMaker(obj), opts));
+       return Proxy.create(merge(handlerMaker(obj), opts));
    } else {
-       return  Proxy.create(merge(handlerMaker(obj), opts), comb.isHash(proto) ? proto : proto.prototype);
+       return Proxy.create(merge(handlerMaker(obj), opts), comb.isHash(proto) ? proto : proto.prototype);
    }
 }
     </pre>
@@ -617,9 +617,7 @@ function (obj,opts,proto){
 <hr/>
 <em>Defined proxy.js</em>
 
-<p><p> Determines if the object is a proxy or not.
-
-</p>
+<p><p> Determines if the object is a proxy or not.</p>
 </p>
 
 
@@ -674,9 +672,7 @@ function (obj){
 <em>Defined proxy.js</em>
 
 <p><p>Creates a method missing proxy for an object.
-<b>NOTE:</b> This method does not gurantee that the property will be used as a function call.
-
-</p>
+<b>NOTE:</b> This method does not gurantee that the property will be used as a function call.</p>
 </p>
 
     <em>Example</em>
@@ -726,7 +722,7 @@ var x = {hello:function () {return &quot;hello&quot;}, world:&quot;world&quot;};
     <pre class="prettyprint linenums lang-js">
 function (obj,handler,proto){
    proto = proto || {};
-   return  Proxy.create(merge(handlerMaker(obj), noSuchMethodHandler(obj, handler)), comb.isHash(proto) ? proto : proto.prototype);
+   return Proxy.create(merge(handlerMaker(obj), noSuchMethodHandler(obj, handler)), comb.isHash(proto) ? proto : proto.prototype);
 }
     </pre>
     
