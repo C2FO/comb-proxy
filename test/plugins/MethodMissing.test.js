@@ -1,21 +1,21 @@
 "use strict";
 var it = require('it'),
     assert = require('assert'),
-    comb = require("index"),
+    comb = require("../../index"),
     define = comb.define,
     hitch = comb.hitch;
 
 it.describe("comb.plugins.MethodMissing", function (it) {
 //Super of other classes
     var Missing = define(comb.plugins.MethodMissing, {
-        instance:{
+        instance: {
 
-            constructor:function (options) {
+            constructor: function (options) {
                 this._super(arguments);
                 this._attributes = {};
             },
 
-            instanceMethod:function (val, force) {
+            instanceMethod: function (val, force) {
                 if (force) {
                     this.randomValue = val;
                     return this;
@@ -24,11 +24,11 @@ it.describe("comb.plugins.MethodMissing", function (it) {
                 }
             },
 
-            setMissingProperty:function (name, val) {
+            setMissingProperty: function (name, val) {
                 this._attributes[name] = val;
             },
 
-            getMissingProperty:function (name) {
+            getMissingProperty: function (name) {
                 return this._attributes[name];
             }
         }
