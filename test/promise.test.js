@@ -1,7 +1,7 @@
 "use strict";
 var it = require('it'),
     assert = require('assert'),
-    comb = require("index"),
+    comb = require("../index"),
     Promise = comb.Promise,
     PromiseList = comb.PromiseList;
 
@@ -9,91 +9,96 @@ var it = require('it'),
 it.describe("comb#executeInOrder", function (it) {
 
 
-    var staticValueFunction = function (value) {
+    var staticValueFunction = function (value, value2) {
         return comb.argsToArray(arguments).join(" ");
     };
 
     var promiseValueFunction = function (value) {
-        var ret = new comb.Promise();
-        setTimeout(comb.hitch(ret, "callback", comb.argsToArray(arguments).join(" ")), 100);
-        return ret;
+        var ret = new comb.Promise(),
+            args = comb.argsToArray(arguments).join(" ");
+        setTimeout(function () {
+            ret.callback(args);
+        }, 100);
+        return ret.promise();
     };
 
     var hash = {
-        staticValueFunction:staticValueFunction,
-        promiseValueFunction:promiseValueFunction
+        staticValueFunction: staticValueFunction,
+        promiseValueFunction: promiseValueFunction
     };
 
     var TestClass = comb.define(null, {
-        instance:{
+        instance: {
 
-            publicValue:"publicValue",
+            publicValue: "publicValue",
 
-            __privateValue:"privateValue",
+            __privateValue: "privateValue",
 
-            constructor:function (count) {
+            constructor: function (count) {
                 this._instanceCount = count || 0;
             },
 
-            hello:function () {
+            hello: function () {
                 return "hello" + this._instanceCount;
             },
 
-            helloPromise:function () {
+            helloPromise: function () {
                 return promiseValueFunction("hello" + this._instanceCount);
             },
 
-            world:function () {
+            world: function () {
                 return "world" + this._instanceCount;
             },
 
-            worldPromise:function () {
+            worldPromise: function () {
                 return promiseValueFunction("world" + this._instanceCount);
             },
 
-            setters:{
-                pseudoPublicValue:function (value) {
-                    return this.__privateValue = value;
+            setters: {
+                pseudoPublicValue: function (value) {
+                    this.__privateValue = value;
+                    return value;
                 }
             },
 
-            getters:{
-                pseudoPublicValue:function () {
+            getters: {
+                pseudoPublicValue: function () {
                     return this.__privateValue;
                 }
             }
         },
 
-        static:{
+        static: {
 
-            publicValue:"publicValue",
+            publicValue: "publicValue",
 
-            __privateValue:"privateValue",
+            __privateValue: "privateValue",
 
-            hello:function () {
+            hello: function () {
                 return "hello";
             },
 
-            helloPromise:function () {
+            helloPromise: function () {
                 return promiseValueFunction("hello");
             },
 
-            world:function () {
+            world: function () {
                 return "world";
             },
 
-            worldPromise:function () {
+            worldPromise: function () {
                 return promiseValueFunction("world");
             },
 
-            setters:{
-                pseudoPublicValue:function (value) {
-                    return this.__privateValue = value;
+            setters: {
+                pseudoPublicValue: function (value) {
+                    this.__privateValue = value;
+                    return value;
                 }
             },
 
-            getters:{
-                pseudoPublicValue:function () {
+            getters: {
+                pseudoPublicValue: function () {
                     return this.__privateValue;
                 }
             }
@@ -162,23 +167,22 @@ it.describe("comb#executeInOrder", function (it) {
     });
 
     it.should("return the return value with objects that return promises and static values", function (next) {
-        comb.executeInOrder(hash,
-            function (hash) {
-                return [
-                    hash.staticValueFunction("hello", hash.promiseValueFunction("world")),
-                    hash.promiseValueFunction("hello1", hash.staticValueFunction("world1")),
-                    hash.staticValueFunction("hello2", hash.staticValueFunction("world2")),
-                    hash.promiseValueFunction("hello3", hash.promiseValueFunction("world3"))
-                ];
-            }).then(function (val) {
-                assert.deepEqual(val, [
-                    "hello world",
-                    "hello1 world1",
-                    "hello2 world2",
-                    "hello3 world3"
-                ]);
-                next();
-            }, next);
+        comb.executeInOrder(hash, function (hash) {
+            return [
+                hash.staticValueFunction("hello", hash.promiseValueFunction("world")),
+                hash.promiseValueFunction("hello1", hash.staticValueFunction("world1")),
+                hash.staticValueFunction("hello2", hash.staticValueFunction("world2")),
+                hash.promiseValueFunction("hello3", hash.promiseValueFunction("world3"))
+            ];
+        }).then(function (val) {
+            assert.deepEqual(val, [
+                "hello world",
+                "hello1 world1",
+                "hello2 world2",
+                "hello3 world3"
+            ]);
+            next();
+        }, next);
     });
 
 
@@ -315,15 +319,15 @@ it.describe("comb#executeInOrder", function (it) {
             function (TestClass) {
                 var testClass = new TestClass(1);
                 return testClass.bye();
-            }).then(next, function (val) {
-                assert.equal(val.type, "undefined_method");
+            }).then(next, function (err) {
+                assert.equal(err.message, "obj[name] is not a function");
                 next();
             });
     });
 
 
     it.should("it should support certain object methods object properties properly", function (next) {
-        var x = {hello:"hello", world:"world"};
+        var x = {hello: "hello", world: "world"};
         comb.executeInOrder(x,
             function (x) {
                 delete x.hello;
@@ -335,29 +339,27 @@ it.describe("comb#executeInOrder", function (it) {
             }, function (err) {
                 assert.equal(err.message, "Cannot delete");
                 next();
-            })
+            });
     });
 
 
     it.should("it should throw an error the objects keys", function (next) {
-        var x = {hello:"hello", world:"world"};
+        var x = {hello: "hello", world: "world"};
         var count = 0;
         comb.executeInOrder(x,
             function (x) {
                 Object.keys(x);
             }).then(comb.hitch(assert, "fail"), function (err) {
                 assert.equal(err.message, "enumerate is not supported");
-                count++ != 0 && next();
+                count++ !== 0 && next();
             });
         comb.executeInOrder(x,
             function (x) {
                 Object.keys(x);
             }).then(comb.hitch(assert, "fail"), function (err) {
                 assert.equal(err.message, "enumerate is not supported");
-                count++ != 0 && next();
+                count++ !== 0 && next();
             });
     });
 
 }).as(module);
-
-
