@@ -26,6 +26,18 @@ var comb = require("comb-proxy");
 
 ```
 
+## Testing
+
+Testing can be done with the included `Dockerfile` for added insurance
+that your local environment is not supplying anything extra that might
+allow tests to pass that otherwise woudln't. You can run a docker
+build to do all the setup and testing in one like so:
+
+
+```
+docker build -t comb-proxy .
+```
+
 ## License
 
 MIT [LICENSE](https://github.com/c2fo/comb-proxy/raw/master/LICENSE)
